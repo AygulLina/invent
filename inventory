@@ -1,0 +1,28 @@
+dev-scrt-k8s-m1 ip=192.168.10.101
+dev-scrt-k8s-w1 ip=192.168.10.102
+dev-scrt-k8s-w2 ip=192.168.10.103
+
+[all:children]
+kube-node
+kube-master
+
+[kube-master]
+dev-scrt-k8s-m1
+
+[etcd]
+dev-scrt-k8s-m1
+
+[kube-node]
+dev-scrt-k8s-w1
+dev-scrt-k8s-w2
+
+[calico-rr]
+
+[linux:children]
+kube-node
+kube-master
+
+[k8s-cluster:children]
+kube-master
+kube-node
+calico-rr
